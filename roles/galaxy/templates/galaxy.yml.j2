@@ -1,0 +1,22 @@
+galaxy:
+  conda_ensure_channels: {{ galaxy_conda_channels | join(',') }}
+  admin_users: {{ galaxy_admin_users | join(',') }}
+  http: localhost: {{ galaxy_port }}
+
+uwsgi:
+  # required in order to start the galaxy application
+  module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+  virtualenv: .venv
+  pythonpath: lib
+
+  # performance options
+  master: true
+  enable-threads: true
+  processes: 2
+  threads: 4
+  offload-threads: 1
+
+  # fix up signal handling
+  die-on-term: true
+  hook-master-start: unix_signal:2 gracefully_kill_them_all
+  hook-master-start: unix_signal:15 gracefully_kill_them_all

@@ -1,0 +1,23 @@
+# install caddy repo
+- name: Add Caddy repo key
+  ansible.builtin.apt_key:
+    url: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
+    state: present  
+
+- name: Install Caddy repo
+  ansible.builtin.apt_repository:
+    repo: deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main
+    filename: caddy-stable
+    state: present
+
+# install caddy
+- name: Install Caddy
+  apt:
+    name: caddy
+    state: present
+
+# add templated systemd service definition
+- name: Modify Caddyfile at /etc/caddy/Caddyfile
+  template:
+    src: 'Caddyfile.j2'
+    dest: '/etc/caddy/Caddyfile'

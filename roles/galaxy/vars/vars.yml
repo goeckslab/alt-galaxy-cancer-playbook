@@ -1,0 +1,12 @@
+galaxy_system_user: galaxy
+galaxy_install_path: /srv/galaxy
+galaxy_version: release_21.01
+galaxy_admin_users:
+  - sargentl@ohsu.edu
+  - guq@ohsu.edu
+galaxy_conda_channels:
+  - ohsu-comp-bio
+  - bioconda
+  - conda-forge
+  - defaults
+galaxy_port: 8080

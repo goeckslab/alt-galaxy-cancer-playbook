@@ -1,0 +1,5 @@
+- name: Install system packages required by OHSU tools
+  apt:
+    update_cache: yes
+    pkg:
+    - libgl1-mesa-glx

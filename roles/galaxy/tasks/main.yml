@@ -1,0 +1,14 @@
+- name: make Galaxy directory
+  ansible.builtin.file:
+    path: {{ galaxy_install_path }}
+    state: directory
+    mode: '0755'
+    owner: {{ galaxy_system_user }}
+
+- name: get Galaxy
+  ansible.builtin.git:
+    repo: 'https://github.com/galaxyproject/galaxy.git'
+    dest: {{ galaxy_install_path }}
+    version: {{ galaxy_version }}
+
+- name: install extra tools
